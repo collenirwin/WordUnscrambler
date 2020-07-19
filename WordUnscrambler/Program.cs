@@ -46,13 +46,20 @@ namespace WordUnscrambler
                 .PromptUntil("Enter letters: ", entry => entry.Any())
                 .ToLower();
 
-            var matchingWords = _words
+            var matchingWords = _words.AsEnumerable();
+
+            if (_settings.OnlyExactMatches)
+            {
+                matchingWords = matchingWords.Where(word => word.Length == letters.Length);
+            }
+
+            var wordGroups = matchingWords
                 .Where(word => word.CanBeMadeFrom(letters))
                 .GroupBy(word => word.Length)
                 .OrderByDescending(word => word.Key);
 
             string indent = new string(' ', _settings.OutputIndentWidth);
-            foreach (var group in matchingWords)
+            foreach (var group in wordGroups)
             {
                 _console.WriteLine($"{group.Key} letter words:");
 
@@ -63,7 +70,7 @@ namespace WordUnscrambler
                 }
             }
 
-            if (!matchingWords.Any())
+            if (!wordGroups.Any())
             {
                 using var scope = new ColorScope(ConsoleColor.Red, Console.BackgroundColor);
                 _console.WriteLine("No matching words found.");
