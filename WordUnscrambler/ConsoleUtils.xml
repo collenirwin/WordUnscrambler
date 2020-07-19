@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ConsoleUtils</name>
+    </assembly>
+    <members>
+        <member name="T:ConsoleUtils.ColorScope">
+            <summary>
+            Changes the <see cref="T:System.Console"/> colors, switching them back to their previous state when disposed
+            </summary>
+        </member>
+        <member name="P:ConsoleUtils.ColorScope.ForeColor">
+            <summary>
+            This color scope's foreground color
+            </summary>
+        </member>
+        <member name="P:ConsoleUtils.ColorScope.BackColor">
+            <summary>
+            This color scope's background color
+            </summary>
+        </member>
+        <member name="M:ConsoleUtils.ColorScope.#ctor(System.ConsoleColor,System.ConsoleColor)">
+            <summary>
+            Initializes a <see cref="T:ConsoleUtils.ColorScope"/> with background and foreground colors
+            </summary>
+            <param name="foreColor">Value for <see cref="P:System.Console.ForegroundColor"/></param>
+            <param name="backColor">Value for <see cref="P:System.Console.BackgroundColor"/></param>
+        </member>
+        <member name="M:ConsoleUtils.ColorScope.Dispose">
+            <summary>
+            Sets the <see cref="T:System.Console"/> colors back to their state when this object was initialized
+            </summary>
+        </member>
+        <member name="M:ConsoleUtils.ColorScope.Dispose(System.Boolean)">
+            <summary>
+            Sets the <see cref="T:System.Console"/> colors back to their state when this object was initialized
+            </summary>
+            <param name="disposing">Should we be switching the colors back?</param>
+        </member>
+        <member name="T:ConsoleUtils.IConsole">
+            <summary>
+            Barebones console that can read and write text
+            </summary>
+        </member>
+        <member name="T:ConsoleUtils.PromptExtensions">
+            <summary>
+            Contains <see cref="T:ConsoleUtils.IConsole"/> extension methods for prompting
+            </summary>
+        </member>
+        <member name="M:ConsoleUtils.PromptExtensions.Prompt(ConsoleUtils.IConsole,System.String)">
+            <summary>
+            Write a message, then read a response
+            </summary>
+            <param name="console">The <see cref="T:ConsoleUtils.IConsole"/> instance to use</param>
+            <param name="message">Message to write</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <returns>The <see cref="M:ConsoleUtils.IConsole.ReadLine"/> response</returns>
+        </member>
+        <member name="M:ConsoleUtils.PromptExtensions.PromptOnNewLine(ConsoleUtils.IConsole,System.String)">
+            <summary>
+            Write a message and newline, then read a response
+            </summary>
+            <param name="console">The <see cref="T:ConsoleUtils.IConsole"/> instance to use</param>
+            <param name="message">Message to write</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <returns>The <see cref="M:ConsoleUtils.IConsole.ReadLine"/> response</returns>
+        </member>
+        <member name="M:ConsoleUtils.PromptExtensions.PromptUntil(ConsoleUtils.IConsole,System.String,System.Predicate{System.String})">
+            <summary>
+            Prompts until a predicate is met
+            </summary>
+            <param name="console">The <see cref="T:ConsoleUtils.IConsole"/> instance to use</param>
+            <param name="message">Message to write</param>
+            <param name="predicate">Predicate to evaluate using the user's input</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <returns>The <see cref="M:ConsoleUtils.IConsole.ReadLine"/> response</returns>
+        </member>
+        <member name="T:ConsoleUtils.StandardConsole">
+            <summary>
+            Basic <see cref="T:ConsoleUtils.IConsole"/> implementation, wrapping <see cref="T:System.Console"/> methods
+            </summary>
+        </member>
+        <member name="M:ConsoleUtils.StandardConsole.ReadLine">
+            <summary>
+            Reads a line of standard input (wraps <see cref="M:System.Console.ReadLine"/>)
+            </summary>
+            <returns>The user-input line</returns>
+        </member>
+        <member name="M:ConsoleUtils.StandardConsole.Write(System.String)">
+            <summary>
+            Writes to standard output (wraps <see cref="M:System.Console.Write(System.Boolean)"/>)
+            </summary>
+            <param name="message">Text to write</param>
+        </member>
+        <member name="M:ConsoleUtils.StandardConsole.WriteLine(System.String)">
+            <summary>
+            Writes to standard output (wraps <see cref="M:System.Console.WriteLine"/>)
+            </summary>
+            <param name="message">Text to write</param>
+        </member>
+        <member name="T:ConsoleUtils.TypedExtensions">
+            <summary>
+            Contains <see cref="T:ConsoleUtils.IConsole"/> extension methods for typed input
+            </summary>
+        </member>
+        <member name="M:ConsoleUtils.TypedExtensions.ReadInt(ConsoleUtils.IConsole)">
+            <summary>
+            Parses the result of <see cref="M:ConsoleUtils.IConsole.ReadLine"/> as an <see cref="T:System.Int32"/>
+            </summary>
+            <param name="console">The <see cref="T:ConsoleUtils.IConsole"/> instance to use</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.FormatException"/>
+            <exception cref="T:System.OverflowException"/>
+            <returns>The parsed input</returns>
+        </member>
+        <member name="M:ConsoleUtils.TypedExtensions.TryReadInt(ConsoleUtils.IConsole,System.Int32@)">
+            <summary>
+            Parses the result of <see cref="M:ConsoleUtils.IConsole.ReadLine"/> as an <see cref="T:System.Int32"/>
+            </summary>
+            <param name="console">The <see cref="T:ConsoleUtils.IConsole"/> instance to use</param>
+            <param name="result">Will be assigned to the parsed input</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:ConsoleUtils.TypedExtensions.ReadDouble(ConsoleUtils.IConsole)">
+            <summary>
+            Parses the result of <see cref="M:ConsoleUtils.IConsole.ReadLine"/> as a <see cref="T:System.Double"/>
+            </summary>
+            <param name="console">The <see cref="T:ConsoleUtils.IConsole"/> instance to use</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.FormatException"/>
+            <exception cref="T:System.OverflowException"/>
+            <returns>The parsed input</returns>
+        </member>
+        <member name="M:ConsoleUtils.TypedExtensions.TryReadDouble(ConsoleUtils.IConsole,System.Double@)">
+            <summary>
+            Parses the result of <see cref="M:ConsoleUtils.IConsole.ReadLine"/> as a <see cref="T:System.Double"/>
+            </summary>
+            <param name="console">The <see cref="T:ConsoleUtils.IConsole"/> instance to use</param>
+            <param name="result">Will be assigned to the parsed input</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:ConsoleUtils.TypedExtensions.ReadMapped``1(ConsoleUtils.IConsole,System.Func{System.String,``0})">
+            <summary>
+            Runs the given mapper function on the result of <see cref="M:ConsoleUtils.IConsole.ReadLine"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console">The <see cref="T:ConsoleUtils.IConsole"/> instance to use</param>
+            <param name="mapper">Function to map the input to the desired type or format</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <returns>The mapped input</returns>
+        </member>
+    </members>
+</doc>
